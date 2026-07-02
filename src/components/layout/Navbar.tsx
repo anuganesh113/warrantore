@@ -92,8 +92,8 @@ export default function Navbar() {
   return (
     <header className="w-full relative z-40 bg-white font-sans text-text-dark">
       {/* 1. TOP BAR */}
-      <div className="bg-[#F5F5F5] border-b border-gray-200 text-xs py-2.5 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div className="bg-[#F5F5F5] border-b border-gray-200 text-[10px] sm:text-xs py-2 px-3 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-row justify-between items-center gap-1 sm:gap-2">
           {/* Hotline */}
           <div className="flex items-center gap-2 text-text-muted">
             <Phone className="w-3.5 h-3.5 text-brand-red" />
@@ -138,7 +138,7 @@ export default function Navbar() {
       </div>
 
       {/* 2. MAIN HEADER BAR */}
-      <div className="py-5 px-4 sm:px-6 border-b border-gray-100 bg-white">
+      <div className="py-3 sm:py-5 px-3 sm:px-6 border-b border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
@@ -193,16 +193,16 @@ export default function Navbar() {
       </div>
 
       {/* 3. SUB-HEADER NAVY BAR */}
-      <div className="bg-brand-navy text-white py-3 px-4 sm:px-6 border-b border-brand-red/10 shadow-md">
+      <div className="bg-brand-navy text-white py-2 sm:py-3 px-3 sm:px-6 border-b border-brand-red/10 shadow-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           
           {/* Top Categories Menu Dropdown */}
           <div 
-            className="relative"
+            className="relative hidden md:block"
             onMouseEnter={() => setCategoriesOpen(true)}
             onMouseLeave={() => setCategoriesOpen(false)}
           >
-            <button className="flex items-center justify-between gap-3 bg-brand-red hover:bg-brand-red-hover text-white px-5 py-3 rounded-md font-bold text-xs uppercase tracking-wider transition-all shadow-md select-none h-11 w-[200px] sm:w-[220px]">
+            <button className="flex items-center justify-between gap-3 bg-brand-red hover:bg-brand-red-hover text-white px-5 py-3 rounded-md font-bold text-xs uppercase tracking-wider transition-all shadow-md select-none h-11 w-[200px]">
               <div className="flex items-center gap-2">
                 <Hamburger className="w-4 h-4" />
                 <span>Top Categories</span>
@@ -216,7 +216,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  className="absolute top-full left-0 w-[200px] sm:w-[220px] bg-white border border-gray-100 shadow-2xl rounded-b-lg py-1 mt-0 z-50 text-text-dark font-semibold text-xs"
+                  className="absolute top-full left-0 w-[200px] bg-white border border-gray-100 shadow-2xl rounded-b-lg py-1 mt-0 z-50 text-text-dark font-semibold text-xs"
                 >
                   {categories.map((c) => (
                     <Link
@@ -249,10 +249,10 @@ export default function Navbar() {
           </div>
 
           {/* Right: Search + Cart */}
-          <div className="flex items-center gap-3 sm:gap-4 flex-1 lg:flex-none justify-end min-w-0">
+          <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end min-w-0">
             
             {/* Search Input Container */}
-            <div ref={searchRef} className="relative shrink-0 w-[200px] sm:w-[250px] md:w-[320px]">
+            <div ref={searchRef} className="relative w-[120px] sm:w-[180px] md:w-[260px] lg:w-[320px]">
               <div className="flex bg-white rounded-md overflow-hidden h-11">
                 <input
                   type="text"
@@ -321,12 +321,15 @@ export default function Navbar() {
             {/* Shopping Cart Button */}
             <button 
               onClick={toggleCart}
-              className="flex flex-1 min-w-0 w-full items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-hover text-white rounded-md px-4 h-11 font-bold text-xs uppercase tracking-wider transition-all shadow-md relative"
+              className="flex items-center justify-center gap-1.5 bg-brand-red hover:bg-brand-red-hover text-white rounded-md px-3 h-11 font-bold text-xs uppercase tracking-wider transition-all shadow-md relative shrink-0"
             >
               <ShoppingBag className="w-4 h-4" />
               <span className="hidden sm:inline">Cart /</span>
-              <span className="font-extrabold font-display">
+              <span className="hidden sm:inline font-extrabold font-display">
                 Rs. {cartTotal.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+              </span>
+              <span className="sm:hidden font-extrabold font-display text-[10px]">
+                Rs.{cartTotal.toLocaleString("en-US", { minimumFractionDigits: 0 })}
               </span>
               <span className="bg-white text-brand-red font-black rounded-full text-[9px] w-4.5 h-4.5 flex items-center justify-center absolute -top-1.5 -right-1.5 shadow-md">
                 {cartCount}
@@ -358,8 +361,8 @@ export default function Navbar() {
             >
               <div className="w-screen max-w-xs bg-white shadow-2xl flex flex-col justify-between p-6">
                 <div>
-                  <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
-                    <span className="font-display font-black text-xl text-brand-navy">ELECTON MENU</span>
+                  <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
+                    <span className="font-display font-black text-xl text-brand-navy">MENU</span>
                     <button 
                       onClick={() => setMobileMenuOpen(false)}
                       className="p-2 rounded-full hover:bg-gray-100 text-gray-500"
@@ -368,7 +371,7 @@ export default function Navbar() {
                     </button>
                   </div>
                   
-                  <nav className="flex flex-col gap-5 text-sm font-bold text-brand-navy">
+                  <nav className="flex flex-col gap-4 text-sm font-bold text-brand-navy">
                     <Link href="/" className={`${pathname === '/' ? 'text-brand-red' : ''} hover:text-brand-red transition-all`} onClick={() => setMobileMenuOpen(false)}>
                       Home
                     </Link>
@@ -382,6 +385,22 @@ export default function Navbar() {
                       Contact
                     </Link>
                   </nav>
+
+                  <div className="mt-6 pt-4 border-t border-gray-100">
+                    <h3 className="text-[10px] font-bold text-text-light uppercase tracking-wider mb-3">Top Categories</h3>
+                    <div className="flex flex-col gap-3">
+                      {categories.map((c) => (
+                        <Link
+                          key={c.slug}
+                          href={`/shop?category=${c.slug}`}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="text-sm font-semibold text-brand-navy hover:text-brand-red transition-all"
+                        >
+                          {c.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
                 
                 <div className="border-t border-gray-100 pt-6">

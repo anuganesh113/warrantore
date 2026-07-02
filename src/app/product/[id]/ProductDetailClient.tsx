@@ -456,41 +456,43 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
         {/* 4. DETAILS ACCORDION / TABS PANEL */}
         <div className="mt-20 border border-gray-150 rounded-2xl overflow-hidden shadow-sm">
           {/* Header tabs */}
-          <div className="bg-gray-50 flex border-b border-gray-150 text-xs font-black uppercase tracking-wider select-none">
-            <button
-              onClick={() => setActiveTab("desc")}
-              className={`flex-1 py-4.5 text-center transition-all border-b-2 ${
-                activeTab === "desc"
-                  ? "border-brand-red bg-white text-brand-navy"
-                  : "border-transparent text-text-light hover:text-brand-navy hover:bg-white/50"
-              }`}
-            >
-              Description
-            </button>
-            <button
-              onClick={() => setActiveTab("specs")}
-              className={`flex-1 py-4.5 text-center transition-all border-b-2 ${
-                activeTab === "specs"
-                  ? "border-brand-red bg-white text-brand-navy"
-                  : "border-transparent text-text-light hover:text-brand-navy hover:bg-white/50"
-              }`}
-            >
-              Specifications
-            </button>
-            <button
-              onClick={() => setActiveTab("shipping")}
-              className={`flex-1 py-4.5 text-center transition-all border-b-2 ${
-                activeTab === "shipping"
-                  ? "border-brand-red bg-white text-brand-navy"
-                  : "border-transparent text-text-light hover:text-brand-navy hover:bg-white/50"
-              }`}
-            >
-              Shipping & Returns
-            </button>
+          <div className="bg-gray-50 border-b border-gray-150 text-xs font-black uppercase tracking-wider select-none overflow-x-auto no-scrollbar">
+            <div className="flex min-w-max sm:min-w-0">
+              <button
+                onClick={() => setActiveTab("desc")}
+                className={`flex-1 py-3 sm:py-4.5 px-3 text-center transition-all border-b-2 whitespace-nowrap ${
+                  activeTab === "desc"
+                    ? "border-brand-red bg-white text-brand-navy"
+                    : "border-transparent text-text-light hover:text-brand-navy hover:bg-white/50"
+                }`}
+              >
+                Description
+              </button>
+              <button
+                onClick={() => setActiveTab("specs")}
+                className={`flex-1 py-3 sm:py-4.5 px-3 text-center transition-all border-b-2 whitespace-nowrap ${
+                  activeTab === "specs"
+                    ? "border-brand-red bg-white text-brand-navy"
+                    : "border-transparent text-text-light hover:text-brand-navy hover:bg-white/50"
+                }`}
+              >
+                Specifications
+              </button>
+              <button
+                onClick={() => setActiveTab("shipping")}
+                className={`flex-1 py-3 sm:py-4.5 px-3 text-center transition-all border-b-2 whitespace-nowrap ${
+                  activeTab === "shipping"
+                    ? "border-brand-red bg-white text-brand-navy"
+                    : "border-transparent text-text-light hover:text-brand-navy hover:bg-white/50"
+                }`}
+              >
+                Shipping & Returns
+              </button>
+            </div>
           </div>
 
           {/* Tab Content */}
-          <div className="p-8 sm:p-10 bg-white">
+          <div className="p-5 sm:p-10 bg-white">
             <AnimatePresence mode="wait">
               {activeTab === "desc" && (
                 <motion.div
@@ -522,7 +524,8 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 >
                   {product.specs && product.specs.length > 0 ? (
                     <div className="border border-gray-150 rounded-xl overflow-hidden">
-                      <table className="w-full text-xs sm:text-sm text-left">
+                      {/* Desktop: table layout */}
+                      <table className="hidden md:table w-full text-xs sm:text-sm text-left">
                         <thead>
                           <tr className="bg-gray-50 border-b border-gray-150 font-black text-brand-navy uppercase tracking-wider">
                             <th className="py-4 px-6">Specification</th>
@@ -538,6 +541,15 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                           ))}
                         </tbody>
                       </table>
+                      {/* Mobile: stacked card layout */}
+                      <div className="md:hidden divide-y divide-gray-150">
+                        {product.specs.map((spec) => (
+                          <div key={spec.label} className="py-3.5 px-4 flex flex-col gap-1">
+                            <span className="text-[11px] font-black text-brand-navy uppercase tracking-wider">{spec.label}</span>
+                            <span className="text-xs font-semibold text-text-muted leading-relaxed">{spec.value}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ) : (
                     <p className="text-xs sm:text-sm text-text-light font-bold">No specs available for this product.</p>

@@ -19,7 +19,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Electon - Premium Smart Electronics & Gadgets Store",
+  title: "Warrantore - Premium Smart Electronics and Gadgets Store",
   description: "Clone of Electon7 Shop. Experience the next generation of smart tech, gadgets, cameras, and audio devices at best deals.",
 };
 
